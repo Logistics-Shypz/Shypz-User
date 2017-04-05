@@ -28,8 +28,9 @@ public class UserController {
 		
 		
 		return Arrays.asList(
-					new User(1,"anubhav","anubhav.nanda@gmail.com","lockargil2302","9739325635"),
-					new User(2,"mukesh","mukesh14j@gmail.com","lockargil2302","9619028595")
+					new User(1,"anubhav","anubhav.nanda@gmail.com","dgdfgdfgdf","546345346"),
+					new User(2,"mukesh","mukesh14j@gmail.com","dghghgrethgre2","4564554654"),
+					new User()
 				);
 	}
 

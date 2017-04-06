@@ -1,10 +1,12 @@
 package com.shypz.shypzuser.controllers;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shypz.shypzuser.pojo.User;
+import com.shypz.shypzuser.services.UserService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +19,9 @@ public class UserController {
 	
 	public static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping("/hello")
 	public String getHello(){
 		return "hello";
@@ -27,11 +32,7 @@ public class UserController {
 		log.info("list of users called");
 		
 		
-		return Arrays.asList(
-					new User(1,"anubhav","anubhav.nanda@gmail.com","dgdfgdfgdf","546345346"),
-					new User(2,"mukesh","mukesh14j@gmail.com","dghghgrethgre2","4564554654"),
-					new User()
-				);
+		return userService.getAllUsers();
 	}
 
 }

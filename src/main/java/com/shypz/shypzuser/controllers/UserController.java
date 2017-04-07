@@ -67,6 +67,12 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.DELETE,value="/users/id/{id}")
+	public void deleteUserById(@PathVariable int id){
+		 
+		 userService.deleteUserById(id);
+		
+	}
 	
 
 }

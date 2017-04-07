@@ -60,6 +60,20 @@ public class UserService {
 			 }
 		}
 	}
+
+	public void deleteUserById(int id) {
+		// TODO Auto-generated method stub
+		
+		for(int i=0;i<users.size();i++){
+			 User user = users.get(i);
+			 
+			 if(user.getUser_Id() == id){
+				 users.remove(i);
+				 
+			 }
+		}
+		
+	}
 	
 	
 

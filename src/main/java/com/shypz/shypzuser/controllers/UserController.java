@@ -3,7 +3,9 @@ package com.shypz.shypzuser.controllers;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shypz.shypzuser.pojo.User;
@@ -36,10 +38,28 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 	
-	@RequestMapping("/users/{id}")
+	@RequestMapping("/users/id/{id}")
 	public User getUserById(@PathVariable int id){
+		
+		log.info("list of users called with id : " + id);
 		
 		return userService.getUserById(id);
 	}
+	
+	@RequestMapping("/users/name/{user_name}")
+	public User getUserByName(@PathVariable String user_name){
+		log.info("list of users called with name : " + user_name);
+		
+		return userService.getUserByName(user_name);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST,value="/users")
+	public void addUser(@RequestBody User u){
+		 System.out.println(u.getUser_Id());
+		 userService.addUser(u);
+		
+	}
+	
+	
 
 }

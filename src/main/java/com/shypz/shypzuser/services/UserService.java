@@ -1,5 +1,6 @@
 package com.shypz.shypzuser.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
@@ -12,11 +13,11 @@ import com.shypz.shypzuser.pojo.User;
 public class UserService {
 	
 	
-	private List<User> users = Arrays.asList(
+	private List<User> users = new ArrayList<>(Arrays.asList(
 			new User(1,"anubhav","anubhav.nanda@gmail.com","dgdfgdfgdf","546345346"),
 			new User(2,"mukesh","mukesh14j@gmail.com","dghghgrethgre2","4564554654"),
 			new User(3,"test","test@gmail.com","dgdgdggdfd","43534534534")
-		);
+		));
 	
 	
 	public List<User> getAllUsers(){
@@ -36,6 +37,15 @@ public class UserService {
 		
 		return uret;
 		
+	}
+	
+	public User getUserByName(String name){
+		return users.stream().filter(u -> u.getUser_Name().equals(name)).findFirst().get();
+	}
+
+	public void addUser(User u) {
+		// TODO Auto-generated method stub
+		users.add(u);
 	}
 	
 	

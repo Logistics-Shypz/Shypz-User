@@ -60,6 +60,13 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.PUT,value="/users/id/{id}")
+	public void updateUserById(@RequestBody User u, @PathVariable int id){
+		 
+		 userService.updateUserById(id,u);
+		
+	}
+	
 	
 
 }

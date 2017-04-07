@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: User module for Shypz
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: H216104
+Built-By: anubhavnanda
 Implementation-Vendor-Id: com.shypz.shypzuser
 Build-Jdk: 1.8.0_121
 Implementation-URL: http://projects.spring.io/spring-boot/Shypz-User/

@@ -1,7 +1,12 @@
 package com.shypz.shypzuser.pojo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 	
+	@Id
 	private int User_Id;
 	private String User_Name;
 	private String User_Email;

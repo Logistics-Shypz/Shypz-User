@@ -5,12 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shypz.shypzuser.DAO.UserDAO;
+import com.shypz.shypzuser.interfaces.UserDAOInterface;
 import com.shypz.shypzuser.pojo.User;
 
 @Service
 public class UserService {
+	
+	@Autowired
+	private UserDAO userdao;
 	
 	
 	private List<User> users = new ArrayList<>(Arrays.asList(
@@ -22,6 +28,10 @@ public class UserService {
 	
 	public List<User> getAllUsers(){
 		
+		//return users;
+		
+		List<User> users = new ArrayList<>();
+		userdao.findAll().forEach(users::add);
 		return users;
 	}
 	
@@ -45,7 +55,35 @@ public class UserService {
 
 	public void addUser(User u) {
 		// TODO Auto-generated method stub
-		users.add(u);
+		//users.add(u);
+		userdao.save(u);
+	}
+
+	public void updateUserById(int id, User u) {
+		// TODO Auto-generated method stub
+		
+		for(int i=0;i<users.size();i++){
+			 User user = users.get(i);
+			 
+			 if(user.getUser_Id() == id){
+				 users.set(i,u);
+				 
+			 }
+		}
+	}
+
+	public void deleteUserById(int id) {
+		// TODO Auto-generated method stub
+		
+		for(int i=0;i<users.size();i++){
+			 User user = users.get(i);
+			 
+			 if(user.getUser_Id() == id){
+				 users.remove(i);
+				 
+			 }
+		}
+		
 	}
 	
 	

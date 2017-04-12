@@ -1,13 +1,19 @@
 package com.shypz.shypzuser.pojo;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="User")
 public class User {
 	
 	@Id
-	private int User_Id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long User_Id;
 	private String User_Name;
 	private String User_Email;
 	private String User_Password;
@@ -29,7 +35,7 @@ public class User {
 
 
 
-	public int getUser_Id() {
+	public long getUser_Id() {
 		return User_Id;
 	}
 

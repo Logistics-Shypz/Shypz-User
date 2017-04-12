@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.shypz.shypzuser.pojo.User;
 
-public interface UserDAO extends CrudRepository<User,Integer>{
+public interface UserDAO extends CrudRepository<User,Long>{
 
 	
 }

@@ -31,12 +31,13 @@ public class UserService {
 		//return users;
 		
 		List<User> users = new ArrayList<>();
-		userdao.findAll().forEach(users::add);
+		userdao.findAll()
+		.forEach(users::add);
 		return users;
 	}
 	
-	public User getUserById(int id){
-		User uret = new User();
+	public User getUserById(long id){
+		/*User uret = new User();
 		for(User u:users){
 			
 			if(u.getUser_Id() == id){
@@ -46,6 +47,9 @@ public class UserService {
 		}
 		
 		return uret;
+		*/
+		
+		return userdao.findOne(id);
 		
 	}
 	
@@ -59,9 +63,9 @@ public class UserService {
 		userdao.save(u);
 	}
 
-	public void updateUserById(int id, User u) {
+	public void updateUserById(long id, User u) {
 		// TODO Auto-generated method stub
-		
+		/*
 		for(int i=0;i<users.size();i++){
 			 User user = users.get(i);
 			 
@@ -69,20 +73,33 @@ public class UserService {
 				 users.set(i,u);
 				 
 			 }
+		}*/
+		User p = userdao.findOne(id);
+		if(p == null){
+			userdao.save(u);
 		}
+		else{
+			p.setUser_Name(u.getUser_Name());
+			p.setUser_Email(u.getUser_Email());
+			p.setUser_Password(u.getUser_Password());
+			p.setUser_Mobile(u.getUser_Mobile());
+			userdao.save(p);
+		}
+		
 	}
 
-	public void deleteUserById(int id) {
+	public void deleteUserById(long id) {
 		// TODO Auto-generated method stub
 		
-		for(int i=0;i<users.size();i++){
+		/*for(int i=0;i<users.size();i++){
 			 User user = users.get(i);
 			 
 			 if(user.getUser_Id() == id){
 				 users.remove(i);
 				 
 			 }
-		}
+		}*/
+		userdao.delete(id);
 		
 	}
 	

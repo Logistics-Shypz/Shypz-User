@@ -5,10 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shypz.shypzuser.DAO.UserDAO;
+import com.shypz.shypzuser.controllers.UserController;
 import com.shypz.shypzuser.interfaces.UserDAOInterface;
 import com.shypz.shypzuser.pojo.User;
 
@@ -17,6 +20,8 @@ public class UserService {
 	
 	@Autowired
 	private UserDAO userdao;
+	
+	public static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
 	
 	private List<User> users = new ArrayList<>(Arrays.asList(
@@ -54,7 +59,9 @@ public class UserService {
 	}
 	
 	public User getUserByName(String name){
-		return users.stream().filter(u -> u.getUser_Name().equals(name)).findFirst().get();
+		//return users.stream().filter(u -> u.getUser_Name().equals(name)).findFirst().get();
+		log.info("In get User Service by name : " + name);
+		return userdao.findByUsername(name);
 	}
 
 	public void addUser(User u) {
@@ -79,7 +86,7 @@ public class UserService {
 			userdao.save(u);
 		}
 		else{
-			p.setUser_Name(u.getUser_Name());
+			p.setUsername(u.getUsername());
 			p.setUser_Email(u.getUser_Email());
 			p.setUser_Password(u.getUser_Password());
 			p.setUser_Mobile(u.getUser_Mobile());

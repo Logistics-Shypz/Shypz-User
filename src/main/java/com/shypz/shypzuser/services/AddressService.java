@@ -43,6 +43,17 @@ public class AddressService {
 
 	public void updateAddress(Address address, long addressid) {
 		// TODO Auto-generated method stub
+		Address newaddress = addressdao.findOne(addressid);
+		
+		newaddress.setAddressLine(address.getAddressLine());
+		newaddress.setAddressArea(address.getAddressArea());
+		newaddress.setAddressCity(address.getAddressCity());
+		newaddress.setAddressCountry(address.getAddressCountry());
+		newaddress.setAddressState(address.getAddressState());
+		newaddress.setAddressPincode(address.getAddressPincode());
+		
+		addressdao.save(newaddress);
+		
 		
 	}
 

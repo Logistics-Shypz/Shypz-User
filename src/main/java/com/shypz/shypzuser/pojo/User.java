@@ -19,7 +19,8 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long User_Id;
+	@Column(name="User_Id")
+	private long uId;
 	@Column(name="User_Name",unique=true,nullable=false)
 	private String username;
 	@Column(name="User_Email",unique=true,nullable=false,length=255)
@@ -39,7 +40,7 @@ public class User {
 	
 	public User(long user_Id, String username, String user_Email, String user_Password, String user_Mobile) {
 		super();
-		User_Id = user_Id;
+		this.uId = user_Id;
 		this.username = username;
 		User_Email = user_Email;
 		User_Password = user_Password;
@@ -48,11 +49,11 @@ public class User {
 	
 	
 	
-	public long getUser_Id() {
-		return User_Id;
+	public long getId() {
+		return uId;
 	}
-	public void setUser_Id(long user_Id) {
-		User_Id = user_Id;
+	public void setId(long user_Id) {
+		this.uId = user_Id;
 	}
 	public String getUsername() {
 		return username;

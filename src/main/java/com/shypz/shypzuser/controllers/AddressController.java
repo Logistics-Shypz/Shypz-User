@@ -35,22 +35,42 @@ public class AddressController {
 	}
 	
 	
+	
+	
 	@RequestMapping("/users/id/{id}/address")
-	public List<Address> getAllAddresses(@PathVariable long Id){
+	public List<Address> getAllAddresses(@PathVariable long id){
 		
-		   return addressService.getAllAddresses(Id);
+		   return addressService.getAllAddresses(id);
 		   
 		
 		
 		
 	}
 	
+	
+	@RequestMapping("/users/id/{userid}/address/{addressid}")
+	public Address getAddressById(@PathVariable long addressid){
+		
+		log.info("list of address called with id : " + addressid);
+		
+		return addressService.getAddressById(addressid);
+	}
+	
+	
 	@RequestMapping(method=RequestMethod.POST,value="/users/id/{userid}/address")
-	public void addUser(@RequestBody Address address,@PathVariable long userid){
+	public void addAddress(@RequestBody Address address,@PathVariable long userid){
 		 User u = userservice.getUserById(userid);
 		 address.setUser(u);
 		 addressService.addAddress(address);
 		
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT,value="/users/id/{userid}/address/{addressid}")
+	public void updateAddress(@RequestBody Address address,@PathVariable long userid,@PathVariable long addressid){
+		 User u = userservice.getUserById(userid);
+		 address.setUser(u);
+		 addressService.updateAddress(address,addressid);
+		  
 	}
 	
 	

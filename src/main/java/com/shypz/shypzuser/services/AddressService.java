@@ -57,4 +57,11 @@ public class AddressService {
 		
 	}
 
+	public void deleteAddressById(long addressid) {
+		// TODO Auto-generated method stub
+		
+		addressdao.delete(addressid);
+		
+	}
+
 }

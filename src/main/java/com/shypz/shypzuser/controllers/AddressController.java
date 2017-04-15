@@ -43,8 +43,6 @@ public class AddressController {
 		   return addressService.getAllAddresses(id);
 		   
 		
-		
-		
 	}
 	
 	
@@ -71,6 +69,13 @@ public class AddressController {
 		 address.setUser(u);
 		 addressService.updateAddress(address,addressid);
 		  
+	}
+	
+	@RequestMapping(method=RequestMethod.DELETE,value="/users/id/{userid}/address/{addressid}")
+	public void deleteAddressById(@PathVariable long addressid){
+		 
+		 addressService.deleteAddressById(addressid);
+		
 	}
 	
 	

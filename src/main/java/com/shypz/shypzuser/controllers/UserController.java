@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shypz.shypzuser.pojo.Address;
 import com.shypz.shypzuser.pojo.User;
+import com.shypz.shypzuser.services.AddressService;
 import com.shypz.shypzuser.services.UserService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,6 +28,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private AddressService addressService;
+	
+	
+	
 	@RequestMapping("/hello")
 	public String getHello(){
 		return "hello";
@@ -33,24 +41,28 @@ public class UserController {
 	@RequestMapping("/users")
 	public List<User> getAllUsers(){
 		log.info("list of users called");
-		
-		
 		return userService.getAllUsers();
 	}
 	
 	@RequestMapping("/users/id/{id}")
 	public User getUserById(@PathVariable long id){
-		
+		List<Address> address = new ArrayList<>();
 		log.info("list of users called with id : " + id);
-		
-		return userService.getUserById(id);
+		address = addressService.getAllAddresses(id);
+		//System.out.println(address.size());
+		User usr = userService.getUserById(id);
+		usr.setAddress(address);
+		return usr;
 	}
 	
 	@RequestMapping("/users/name/{user_name}")
 	public User getUserByName(@PathVariable String user_name){
+		List<Address> address = new ArrayList<>();
 		log.info("list of users called with name : " + user_name);
-		
-		return userService.getUserByName(user_name);
+		address = addressService.getAllAddressesByName(user_name);
+		User usr = userService.getUserByName(user_name);
+		usr.setAddress(address);
+		return usr;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/users")
@@ -72,6 +84,14 @@ public class UserController {
 	public void deleteUserById(@PathVariable long id){
 		 
 		 userService.deleteUserById(id);
+		
+	}
+	
+	@RequestMapping("/users/id/{id}/addresses")
+	public List<Address> getUserAddressById(@PathVariable long id){
+		log.info("list of user addresses called with id : " + id);
+		
+		return addressService.getAllAddresses(id);
 		
 	}
 	

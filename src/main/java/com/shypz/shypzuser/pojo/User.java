@@ -1,13 +1,20 @@
 package com.shypz.shypzuser.pojo;
 
+import java.util.List;
+
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="User",uniqueConstraints = {
@@ -15,6 +22,7 @@ import javax.persistence.UniqueConstraint;
 		@UniqueConstraint(columnNames = "User_Name"),
 		@UniqueConstraint(columnNames = "User_Email"),
 		@UniqueConstraint(columnNames = "User_Mobile")})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 	
 	@Id
@@ -29,6 +37,8 @@ public class User {
 	private String User_Password;
 	@Column(name="User_Mobile",unique=true,nullable=false,length=10)
 	private String User_Mobile;
+	@OneToMany
+	private List<Address> address;
 	
 	
 	public User() {
@@ -49,6 +59,20 @@ public class User {
 	
 	
 	
+	
+	public User(long uId, String username, String user_Email, String user_Password, String user_Mobile,
+			List<Address> address) {
+		super();
+		this.uId = uId;
+		this.username = username;
+		User_Email = user_Email;
+		User_Password = user_Password;
+		User_Mobile = user_Mobile;
+		this.address = address;
+	}
+
+
+
 	public long getId() {
 		return uId;
 	}
@@ -80,6 +104,18 @@ public class User {
 		User_Mobile = user_Mobile;
 	}
 	
+	public List<Address> getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+
+
 	
 	
 

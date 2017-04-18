@@ -64,4 +64,12 @@ public class AddressService {
 		
 	}
 
+	public List<Address> getAllAddressesByName(String user_name) {
+		// TODO Auto-generated method stub
+		List<Address> address = new ArrayList<>();
+		addressdao.findByUserUsername(user_name)
+		.forEach(address::add);
+		return address;
+	}
+
 }

@@ -20,7 +20,7 @@ import com.shypz.shypzuser.services.UserService;
 public class AddressController {
 	
 	
-	public static final Logger log = LoggerFactory.getLogger(UserController.class);
+	public static final Logger log = LoggerFactory.getLogger(AddressController.class);
 	
 	@Autowired
 	private AddressService addressService;

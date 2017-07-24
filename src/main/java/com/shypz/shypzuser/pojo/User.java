@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -32,13 +33,15 @@ public class User {
 	@Column(name="User_Name",unique=true,nullable=false)
 	private String username;
 	@Column(name="User_Email",unique=true,nullable=false,length=255)
-	private String User_Email;
+	private String userEmail;
 	@Column(name="User_Password",unique=false,nullable=false,length=255)
 	private String User_Password;
 	@Column(name="User_Mobile",unique=true,nullable=false,length=10)
 	private String User_Mobile;
 	@OneToMany
 	private List<Address> address;
+	
+	private String userotp;
 	
 	
 	public User() {
@@ -48,11 +51,11 @@ public class User {
 
 
 	
-	public User(long user_Id, String username, String user_Email, String user_Password, String user_Mobile) {
+	public User(long user_Id, String username, String userEmail, String user_Password, String user_Mobile) {
 		super();
 		this.uId = user_Id;
 		this.username = username;
-		User_Email = user_Email;
+		this.userEmail = userEmail;
 		User_Password = user_Password;
 		User_Mobile = user_Mobile;
 	}
@@ -60,15 +63,28 @@ public class User {
 	
 	
 	
-	public User(long uId, String username, String user_Email, String user_Password, String user_Mobile,
-			List<Address> address) {
+	public User(long uId, String username, String userEmail, String user_Password, String user_Mobile,
+			List<Address> address,String userotp) {
 		super();
 		this.uId = uId;
 		this.username = username;
-		User_Email = user_Email;
+		this.userEmail = userEmail;
 		User_Password = user_Password;
 		User_Mobile = user_Mobile;
 		this.address = address;
+		this.userotp = userotp;
+	}
+
+
+
+	public String getUserotp() {
+		return userotp;
+	}
+
+
+
+	public void setUserotp(String userotp) {
+		this.userotp = userotp;
 	}
 
 
@@ -85,12 +101,16 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getUser_Email() {
-		return User_Email;
+	
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setUser_Email(String user_Email) {
-		User_Email = user_Email;
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
+
+
 	public String getUser_Password() {
 		return User_Password;
 	}

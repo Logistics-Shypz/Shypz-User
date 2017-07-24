@@ -64,10 +64,22 @@ public class UserService {
 		return userdao.findByUsername(name);
 	}
 
-	public void addUser(User u) {
+	public boolean addUser(User u) {
 		// TODO Auto-generated method stub
 		//users.add(u);
-		userdao.save(u);
+		System.out.println("User id is : " + u.getId());
+		User uexist = userdao.findByUserEmail(u.getUserEmail());
+		if(uexist == null){
+			System.out.println("In Add User");
+			userdao.save(u);
+			return false;
+			
+		}
+		else{
+			System.out.println("User already exist");
+			return true;
+		}
+		
 	}
 
 	public void updateUserById(long id, User u) {
@@ -87,7 +99,7 @@ public class UserService {
 		}
 		else{
 			p.setUsername(u.getUsername());
-			p.setUser_Email(u.getUser_Email());
+			p.setUserEmail(u.getUserEmail());
 			p.setUser_Password(u.getUser_Password());
 			p.setUser_Mobile(u.getUser_Mobile());
 			userdao.save(p);

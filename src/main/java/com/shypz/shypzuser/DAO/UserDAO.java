@@ -9,6 +9,7 @@ import com.shypz.shypzuser.pojo.User;
 public interface UserDAO extends CrudRepository<User,Long>{
 	
 	public User findByUsername(String name);
+	public User findByUserEmail(String email);
 
 	
 }

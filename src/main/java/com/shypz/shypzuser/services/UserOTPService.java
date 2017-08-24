@@ -25,9 +25,14 @@ public class UserOTPService {
 	public String getOTP(long id) {
 		// TODO Auto-generated method stub
 		User_OTP otp = otpdao.findByUserUId(id);
+		if(otp != null){
+			String uotp = otp.getUserotp();
+			return uotp;
+		}else{
+			String uotp = "OTP not found";
+			return uotp;
+		}
 		
-		String uotp = otp.getUserotp();
-		return uotp;
 	}
 
 	public void addUserOtp(User_OTP userotp) {

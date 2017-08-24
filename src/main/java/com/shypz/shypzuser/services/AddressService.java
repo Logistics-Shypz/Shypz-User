@@ -29,10 +29,15 @@ public class AddressService {
 		return address;
 	}
 
-	public void addAddress(Address address) {
+	public boolean addAddress(Address address) {
 		// TODO Auto-generated method stub
-		
-		addressdao.save(address);
+		List<Address> addresslist = addressdao.findByUserUId(address.getUser().getId());
+		if(addresslist.size() == 0){
+			addressdao.save(address);
+			return true;
+		}else{
+			return false;
+		}
 		
 	}
 
@@ -41,26 +46,39 @@ public class AddressService {
 		return addressdao.findOne(addressid);
 	}
 
-	public void updateAddress(Address address, long addressid) {
+	public boolean updateAddress(Address address, long addressid) {
 		// TODO Auto-generated method stub
 		Address newaddress = addressdao.findOne(addressid);
 		
-		newaddress.setAddressLine(address.getAddressLine());
-		newaddress.setAddressArea(address.getAddressArea());
-		newaddress.setAddressCity(address.getAddressCity());
-		newaddress.setAddressCountry(address.getAddressCountry());
-		newaddress.setAddressState(address.getAddressState());
-		newaddress.setAddressPincode(address.getAddressPincode());
-		
-		addressdao.save(newaddress);
+		if(newaddress == null){
+			//addressdao.save(address);
+			return false;
+			
+		}
+		else{
+			newaddress.setAddressLine(address.getAddressLine());
+			newaddress.setAddressArea(address.getAddressArea());
+			newaddress.setAddressCity(address.getAddressCity());
+			newaddress.setAddressCountry(address.getAddressCountry());
+			newaddress.setAddressState(address.getAddressState());
+			newaddress.setAddressPincode(address.getAddressPincode());
+			
+			addressdao.save(newaddress);
+			return true;
+		}
 		
 		
 	}
 
-	public void deleteAddressById(long addressid) {
+	public boolean deleteAddressById(long addressid) {
 		// TODO Auto-generated method stub
-		
-		addressdao.delete(addressid);
+		Address addr = addressdao.findOne(addressid);
+		if(addr == null){
+			return false;
+		}else{
+			addressdao.delete(addressid);
+			return true;
+		}
 		
 	}
 

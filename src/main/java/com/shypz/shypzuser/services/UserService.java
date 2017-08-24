@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shypz.security.BCrypt;
+import com.shypz.security.GlobalConstants;
 import com.shypz.shypzuser.DAO.UserDAO;
 import com.shypz.shypzuser.controllers.UserController;
 import com.shypz.shypzuser.interfaces.UserDAOInterface;
@@ -71,6 +73,7 @@ public class UserService {
 		User uexist = userdao.findByUserEmail(u.getUserEmail());
 		if(uexist == null){
 			System.out.println("In Add User");
+			u.setUser_Password(BCrypt.hashpw(u.getUser_Password(), GlobalConstants.SALT));
 			userdao.save(u);
 			return false;
 			
@@ -82,7 +85,7 @@ public class UserService {
 		
 	}
 
-	public void updateUserById(long id, User u) {
+	public boolean updateUserById(long id, User u) {
 		// TODO Auto-generated method stub
 		/*
 		for(int i=0;i<users.size();i++){
@@ -96,6 +99,7 @@ public class UserService {
 		User p = userdao.findOne(id);
 		if(p == null){
 			userdao.save(u);
+			return false;
 		}
 		else{
 			p.setUsername(u.getUsername());
@@ -103,11 +107,12 @@ public class UserService {
 			p.setUser_Password(u.getUser_Password());
 			p.setUser_Mobile(u.getUser_Mobile());
 			userdao.save(p);
+			return true;
 		}
 		
 	}
 
-	public void deleteUserById(long id) {
+	public boolean deleteUserById(long id) {
 		// TODO Auto-generated method stub
 		
 		/*for(int i=0;i<users.size();i++){
@@ -118,7 +123,14 @@ public class UserService {
 				 
 			 }
 		}*/
-		userdao.delete(id);
+		
+		User p = userdao.findOne(id);
+		if(p == null){
+			return false;
+		}else{
+			userdao.delete(id);
+			return true;
+		}
 		
 	}
 	

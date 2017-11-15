@@ -23,7 +23,7 @@ public class UserService {
 	@Autowired
 	private UserDAO userdao;
 	
-	public static final Logger log = LoggerFactory.getLogger(UserController.class);
+	public static final Logger log = LoggerFactory.getLogger(UserService.class);
 	
 	
 	private List<User> users = new ArrayList<>(Arrays.asList(
